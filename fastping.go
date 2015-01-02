@@ -175,6 +175,12 @@ func (p *Pinger) AddIPAddr(ip *net.IPAddr) {
 	p.mu.Unlock()
 }
 
+func (p *Pinger) RemoveIPAddr(ip *net.IPAddr) {
+	p.mu.Lock()
+	delete(p.addrs, ip.String())
+	p.mu.Unlock()
+}
+
 // AddHandler adds event handler to Pinger. event arg should be "receive" or
 // "idle" string.
 //
